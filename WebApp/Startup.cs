@@ -29,7 +29,14 @@ namespace WebApp
         {
             services.AddControllers();
             services.AddDbContext<AppDbContext>(
-                options => options.UseSqlite("Data Source = users.db"));        }
+                options => options.UseSqlite("Data Source = users.db"));       
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -38,6 +45,8 @@ namespace WebApp
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("MyPolicy");
 
             app.UseHttpsRedirection();
 

@@ -6,12 +6,12 @@ namespace Domain
     {
         public int UserId { get; set; }
 
-        public string Name { get; set; } = default!;
+        public string? Name { get; set; }
 
         public string Email { get; set; } = default!;
 
         public string Password { get; set; } = default!;
 
-        public string Score { get; set; } = default!;
+        public int Score { get; set; } = default!;
     }
 }

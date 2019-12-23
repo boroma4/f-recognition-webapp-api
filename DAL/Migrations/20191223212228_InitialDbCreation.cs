@@ -12,10 +12,10 @@ namespace DAL.Migrations
                 {
                     UserId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false),
-                    Score = table.Column<string>(nullable: false)
+                    Score = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
