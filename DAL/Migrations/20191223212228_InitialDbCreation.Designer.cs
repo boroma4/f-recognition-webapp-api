@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191223201115_InitialDbCreation")]
+    [Migration("20191223212228_InitialDbCreation")]
     partial class InitialDbCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,16 +28,14 @@ namespace DAL.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Score")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Score")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("UserId");
 
