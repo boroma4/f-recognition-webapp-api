@@ -42,7 +42,7 @@ namespace WebApp.Controllers
         
         [HttpPost]
         [Route("/api/user/")]
-        public  IActionResult PostUpdateScore(UserDTO dto)
+        public async Task<IActionResult> PostUpdateScore(UserDTO dto)
         {
             
             var user = _context.Users.Find(dto.UserId);
@@ -50,6 +50,8 @@ namespace WebApp.Controllers
             if (user != null)
             {
                 user.Score += dto.Score;
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
                 return Ok(user);
             }
             return NotFound("User not found");
