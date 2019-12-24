@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using DAL;
 using Domain;
-using Microsoft.AspNetCore.Cors;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using WebApp.Model;
 
 namespace WebApp.Controllers
 {
@@ -40,16 +42,17 @@ namespace WebApp.Controllers
         
         [HttpPost]
         [Route("/api/user/")]
-        public  IActionResult UpdateScore(int id,int addScore)
+        public  IActionResult PostUpdateScore(UserDTO dto)
         {
-            var user = _context.Users.Find(id);
+            
+            var user = _context.Users.Find(dto.UserId);
             
             if (user != null)
             {
-                user.Score += addScore;
+                user.Score += dto.Score;
                 return Ok(user);
             }
-            return NotFound("User was not found!");
+            return NotFound("User not found");
         }
 
         [HttpPost]
