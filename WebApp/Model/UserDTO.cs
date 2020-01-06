@@ -2,8 +2,18 @@
 {
     public class UserDTO
     {
-        public int UserId { get; set; } = default!;
+        public int UserId { get; set; } 
         
-        public int Score { get; set; } = default!;
+        public string? Name { get; set; }
+
+        public int Score { get; set; } 
+
+
+        public UserDTO(int id, string name, int score)
+        {
+            UserId = id;
+            Name = name;
+            Score = score;
+        }
     }
 }

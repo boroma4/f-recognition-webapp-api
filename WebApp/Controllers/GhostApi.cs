@@ -35,7 +35,7 @@ namespace WebApp.Controllers
             
             if (user != null)
             {
-                return Ok(user);
+                return Ok(new UserDTO(user.UserId,user.Name,user.Score));
             }
             return NotFound("User was not found!");
         }
@@ -52,7 +52,7 @@ namespace WebApp.Controllers
                 user.Score += dto.Score;
                 _context.Users.Update(user);
                 await _context.SaveChangesAsync();
-                return Ok(user);
+                return Ok(new UserDTO(user.UserId,user.Name,user.Score));
             }
             return NotFound("User not found");
         }
@@ -74,7 +74,7 @@ namespace WebApp.Controllers
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            return Ok(user);
+            return Ok(new UserDTO(user.UserId,user.Name,user.Score));
         }
         
         [HttpPost]
@@ -90,11 +90,12 @@ namespace WebApp.Controllers
             {
                 if (PasswordSecurity.CheckPassword(match[0].Password, user.Password))
                 {
-                    return Ok(match[0]);
+                    return Ok(new UserDTO(match[0].UserId,match[0].Name,match[0].Score));
                 }
             }
             return BadRequest("Wrong email or password");
         }
         
     }
+    
 }
